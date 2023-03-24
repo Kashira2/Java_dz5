@@ -29,31 +29,61 @@ import java.util.Map;
 
 public class dz2 {
     public static void main(String[] args) {
-        Map<String, Integer> listRepit = new HashMap<>();
-        ArrayList listContacts = new ArrayList<>();
-        listContacts.add("Иван Иванов");
-        listContacts.add("Светлана Петрова");
-        listContacts.add("Кристина Белова");
-        listContacts.add("Анна Мусина");
-        listContacts.add("Анна Крутова");
-        listContacts.add("Иван Юрин");
-        listContacts.add("Петр Лыков");
-        listContacts.add("Павел Чернов");
-        listContacts.add("Петр Чернышов");
-        listContacts.add("Мария Федорова");
-        listContacts.add("Марина Светлова");
-        listContacts.add("Мария Савина");
-        listContacts.add("Мария Рыкова");
-        listContacts.add("Марина Лугова");
-        listContacts.add("Анна Владимирова");
-        listContacts.add("Иван Мечников");
-        listContacts.add("Петр Петин");
-        listContacts.add("Иван Ежов");
+        Map<String, Integer> repit = new HashMap<>();
+        Map<String, String> contacts = new HashMap();
 
-        for (int i = 0; i < listContacts.size(); i++) {
-            if(listRepit.containsKey(listContacts.get(i))){
-                listRepit.put(listContacts.get(i), );
-            }else listRepit.put(listContacts.get(i),i);
+        contacts.put("Иванов", "Иван");
+        contacts.put("Петрова", "Светлана");
+        contacts.put("Белова", "Кристина");
+        contacts.put("Мусина", "Анна");
+        contacts.put("Крутова", "Анна");
+        contacts.put("Юрин", "Иван");
+        contacts.put("Лыков", "Петр");
+        contacts.put("Чернов", "Павел");
+        contacts.put("Чернышов", "Петр");
+        contacts.put("Федорова", "Мария");
+        contacts.put("Светлова", "Марина");
+        contacts.put("Савина", "Мария");
+        contacts.put("Рыкова", "Мария");
+        contacts.put("Лугова", "Марина");
+        contacts.put("Владимирова", "Анна");
+        contacts.put("Мечников", "Иван");
+        contacts.put("Петин", "Петр");
+        contacts.put("Ежов", "Иван");
+
+        countName(repit, contacts);
+
+        showSort(repit);
+
+    }
+
+    private static void countName(Map<String, Integer> repit, Map<String, String> contacts) {
+        for (var elem : contacts.entrySet()) {
+            if (repit.containsKey(elem.getValue())) {
+                repit.put(elem.getValue(), repit.get(elem.getValue()) + 1);
+            } else
+                repit.put(elem.getValue(), 1);
+
         }
+        System.out.println(repit);
+    }
+
+    private static void showSort(Map<String, Integer> repit) {
+        ArrayList newList = new ArrayList<>();
+        Integer maxNum = 0;
+        String maxName = "";
+        Integer size = repit.size();
+        for (int i = 0; i < size; i++) {
+            maxNum = 0;
+            for (var elem : repit.entrySet()) {
+                if (elem.getValue() > maxNum) {
+                    maxNum = elem.getValue();
+                    maxName = elem.getKey();
+                }
+            }
+            newList.add(maxName + "=" + maxNum);
+            repit.remove(maxName);
+        }
+        System.out.println(newList.toString());
     }
 }
